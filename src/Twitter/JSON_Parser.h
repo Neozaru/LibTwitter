@@ -1,7 +1,7 @@
 #ifndef H_JSON_PARSER_H
 	#define H_JSON_PARSER_H
 
-	#include <jsoncpp/json.h>
+	#include <json/json.h>
 
 	#include <iostream>
 	#include <fstream>
