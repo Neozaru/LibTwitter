@@ -37,6 +37,43 @@ const std::string& Tweet::get_id() {
 	return _id;
 }
 
+bool Tweet::favorite() {
+
+	this->_set_favorite(true);
+
+}
+
+bool Tweet::unfavorite() {
+	this->_set_favorite(false);
+}
+
+bool Tweet::_set_favorite( bool favorite ) {
+
+	if ( _session != NULL ) {
+
+
+		TwitterRequest* req;
+
+		if ( favorite ) {
+			req = _session->create_favorite_request( _id );
+		}
+		else {
+			req = _session->destroy_favorite_request( _id ); 
+		}
+
+
+		req->send();
+
+		if ( req->get_response_code() == 200 ) {
+			return true;
+		}
+
+	}
+
+	return false;
+
+}
+
 bool Tweet::reply( const std::string& response, const std::list<std::string>& media_paths ) {
 
 	if ( _session != NULL ) {

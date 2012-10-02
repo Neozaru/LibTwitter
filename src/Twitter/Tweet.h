@@ -40,6 +40,10 @@ namespace Twitter {
 
 		void to_stream( std::ostream& stream ) const;
 
+
+		bool favorite();
+		bool unfavorite();
+
 	private:
 
 		TwitterSession* _session;
@@ -53,6 +57,9 @@ namespace Twitter {
 		User* _original_author;
 
 		std::list<User*> _contributors;
+
+		bool _set_favorite( bool favorite );
+
 
 	};
 
