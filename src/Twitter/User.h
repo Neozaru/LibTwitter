@@ -45,9 +45,15 @@ namespace Twitter {
 
 		void to_stream( std::ostream& stream ) const;
 
+
+		bool follow();
+		bool unfollow();
+
 	private:
 
 		const Json::Value& _get_value( const std::string& value );
+
+		bool _set_following( bool follow );
 
 		bool _auto_load;
 		bool _fully_loaded;

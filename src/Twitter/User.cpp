@@ -107,6 +107,43 @@ const std::list<Tweet*>& User::get_tweets( int count, bool include_retweets, boo
 
 }
 
+bool User::follow() {
+
+	this->_set_following(true);
+
+}
+
+bool User::unfollow() {
+
+	this->_set_following(false);
+
+}
+
+bool User::_set_following( bool follow ) {
+
+	if ( _session != NULL ) {
+
+		TwitterRequest* req;
+
+		if ( follow ) {
+			req = _session->create_friendship_by_id_request( _id, true );
+		}
+		else {
+			req = _session->destroy_friendship_by_id_request( _id ); 
+		}
+
+		req->send();
+
+		if ( req->get_response_code() == 200 ) {
+			return true;
+		}
+
+	}
+
+	return false;
+
+}
+
 void User::request_full_info( bool force ) {
 
 	if ( !_fully_loaded || force ) {
