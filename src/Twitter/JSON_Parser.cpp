@@ -24,8 +24,6 @@ int JSON_Parser::test() {
 
 	infile.open ("tests/tweet.json", std::ifstream::in);
 
-	//User* user = User::from_JSON("");
-
 	Json::Value root;   // will contains the root value after parsing.
 	Json::Reader reader;
 	bool parsingSuccessful = reader.parse( infile, root );

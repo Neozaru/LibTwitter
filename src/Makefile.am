@@ -14,4 +14,6 @@ testSuite_SOURCES = Twitter/JSON_Parser.cpp Twitter/JSON_Parser.h \
 					Twitter/Parsable_Object.h \
 					tests.cpp
 
-testSuite_LDADD = -L/usr/local/lib -ljsoncpp $(libtwitterc_LIBS)
+testSuite_LDADD = $(jsoncpp_LIBS) $(libtwitterc_LIBS)
+
+AM_CPPFLAGS = $(jsoncpp_CFLAGS)

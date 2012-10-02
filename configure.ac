@@ -20,6 +20,7 @@ AM_PROG_LIBTOOL
 AC_PROG_MAKE_SET
 
 PKG_CHECK_MODULES([libtwitterc],[libtwitter-core])
+PKG_CHECK_MODULES([jsoncpp],[jsoncpp])
 
 # Checks for header files.
 AC_CHECK_HEADERS([inttypes.h limits.h memory.h stdint.h stdlib.h string.h sys/socket.h sys/time.h])

@@ -16,7 +16,7 @@ namespace Twitter {
 
 	class Tweet : public Parsable_Object {
 	private:
-		//Tweet( const std::string& json );
+
 		Tweet( const Json::Value& root_node, TwitterSession* session );
 
 	public:
@@ -37,14 +37,7 @@ namespace Twitter {
 			return new Tweet(root_node,session);
 		}
 
-
 		void to_stream( std::ostream& stream ) const;
-
-		/*
-		static Tweet* from_JSON_tab( Json::Value root_node ) {
-			return new Tweet(root_node);
-		}
-		*/
 
 	private:
 
