@@ -37,11 +37,39 @@ const std::string& Tweet::get_id() {
 	return _id;
 }
 
+bool Tweet::reply( const std::string& response, const std::list<std::string>& media_paths ) {
+
+	if ( _session != NULL ) {
+
+
+		TwitterRequest* req;
+
+		if ( !media_paths.empty() ) {
+			req = _session->update_status_with_media_request( response, media_paths, _id );
+		}
+		else {
+			req = _session->update_status_request( response, _id ); 
+		}
+
+
+
+		req->send();
+
+		if ( req->get_response_code() == 200 ) {
+			return true;
+		}
+
+	}
+
+	return false;
+
+}
+
 bool Tweet::retweet() {
 
 	if ( _session != NULL ) {
 
-		TwitterRequest* req = _session->retweet_request( this->get_id(), true );
+		TwitterRequest* req = _session->retweet_request( _id, true );
 		req->send();
 
 		if ( req->get_response_code() == 200 ) {

@@ -28,7 +28,8 @@ namespace Twitter {
 		const std::string& get_id();
 
 		bool retweet();
-		void respond( Tweet* tweet );
+		
+		bool reply( const std::string& response, const std::list<std::string>& media_paths = std::list<std::string>(0) );
 
 		bool set_sender( User* sender );
 
