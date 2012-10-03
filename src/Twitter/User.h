@@ -14,6 +14,11 @@ namespace Twitter {
 	class Session;
 	class Tweet;
 
+	/**
+	* \class User
+	* \brief Represents a Twitter User, including his information
+	*
+	*/
 	class User : public Parsable_Object {
 
 	private:
@@ -28,13 +33,56 @@ namespace Twitter {
 			return new User( root_node, session );
 		}
 
+		/**
+		* \fn get_id
+		*
+		*/
 		const std::string& get_id();
+		
+		/**
+		* \fn get_screen_name
+		* \brief Gets screen name (pseudo) of the user
+		*
+		* \return A string containing screen name of this User.
+		*/
 		const std::string& get_screen_name();
+
+		/**
+		* \fn get_description
+		* \brief Gets user description
+		*
+		* \return A string containing user description
+		*
+		*/
 		const std::string& get_description();
 
+		/**
+		* \fn get_creation_date
+		* \brief Gets user registration data
+		*
+		* \return A time_t object containing user creation date
+		*/
 		const time_t& get_creation_date();
 
+		/**
+		* \fn get_status
+		* \brief Returns last user status/tweet
+		*
+		* \return The Tweet object representing current user status
+		*
+		*/
 		Tweet* get_status();
+
+		/**
+		* \fn get_tweets
+		* \brief Returns a list of Tweet posted by this user
+		*
+		* \param count Max number of Tweets to return
+		* \param include_entities true
+		* \param include_replies If true, function returned Tweets will include replies
+		*
+		* \return A list of Tweets posted by this User.
+		*/
 		const std::list<Tweet*>&  get_tweets( int count = 20, bool include_retweets = true, bool include_replies = true );
 
 		void request_full_info( bool force = false );

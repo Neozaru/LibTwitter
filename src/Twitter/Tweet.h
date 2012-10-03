@@ -14,23 +14,98 @@ namespace Twitter {
 
 	class User;
 
+
+	/**
+	* \class Tweet
+	* \brief Represents a Twitter Tweet
+	*
+	*/
 	class Tweet : public Parsable_Object {
 	private:
 
 		Tweet( const Json::Value& root_node, TwitterSession* session );
 
 	public:
+
+		/**
+		* \fn Tweet
+		* \brief Instanciates an invalid Tweet
+		*
+		*/
 		Tweet( bool valid = false ) : Parsable_Object(valid) { std::cout << "Inv" << std::endl; }
+		
+		/**
+		*
+		*/
 		~Tweet();
 
+		/**
+		* \fn get_retweet_count
+		* \brief Gets count of retweets of this Tweet.
+		*
+		* \return Count of retweets of this Tweet.
+		*/
 		int get_retweet_count();
+
+		/**
+		* \fn get_text
+		* \brief Gets text content of this Tweet.
+		*
+		* \return A string containing all text of the Tweet.
+		*
+		*/
 		const std::string& get_text();
+
+		/**
+		* \fn get_id
+		* \brief Gets id of this Tweet
+		*
+		* \return String containing id number of this Tweet
+		*
+		*/
 		const std::string& get_id();
 
+		/**
+		* \fn retweet
+		* \brief Retweets this Tweet
+		* A retweet is a copy of a Tweet, containing name of original author.
+		*
+		* \return true, if Tweet was successfully retweeted, false otherwise
+		*
+		*/
 		bool retweet();
 		
+		/**
+		* \fn reply
+		* \param response Text string containing Tweet reponse
+		* \param media_paths List containing file path of media/images to send with reply
+		*
+		* \return true if response was Tweeted successfully, false otherwise
+		*
+		*
+		*/
 		bool reply( const std::string& response, const std::list<std::string>& media_paths = std::list<std::string>(0) );
 
+
+		/**
+		* \fn favorite
+		* \brief Sets this Tweet as favorite
+		*
+		* \return true if Tweet was successfully favorited, false otherwise
+		*/
+		bool favorite();
+		
+
+		/**
+		* \fn favorite
+		* \brief Unset this Tweet as favorite
+		*
+		* \return true if Tweet was successfully unfavorited, false otherwise
+		*/
+		bool unfavorite();
+
+
+		/**/
 		bool set_sender( User* sender );
 
 
@@ -39,10 +114,6 @@ namespace Twitter {
 		}
 
 		void to_stream( std::ostream& stream ) const;
-
-
-		bool favorite();
-		bool unfavorite();
 
 	private:
 
