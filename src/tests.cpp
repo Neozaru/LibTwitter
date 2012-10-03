@@ -3,6 +3,7 @@
 
 #include "Twitter/JSON_Parser.h"
 #include "Twitter/Session.h"
+#include "Twitter/User_Stream.h"
 
 
 #include <iostream>
@@ -73,12 +74,17 @@ int main( int argc, char** argv ) {
 
 		Twitter::Tweet* tweet = session->get_tweet( "210462857140252672" );
 
+		/*
 		if ( tweet != NULL ) {
 			
 			std::cout << "TW = " << *tweet << std::endl;
 			tweet->retweet();
 
 		}
+		*/
+
+		Twitter::User_Stream* us = new Twitter::User_Stream( session );
+		us->send();
 	
 
 	}
