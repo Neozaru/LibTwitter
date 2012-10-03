@@ -17,3 +17,8 @@ testSuite_SOURCES = Twitter/JSON_Parser.cpp Twitter/JSON_Parser.h \
 testSuite_LDADD = $(jsoncpp_LIBS) $(libtwitterc_LIBS)
 
 AM_CPPFLAGS = $(jsoncpp_CFLAGS)
+
+
+# Remove is libcurl is statically linked
+testSuite_LDADD += $(libcurl_LIBS)
+AM_CPPFLAGS += $(libcurl_CFLAGS)

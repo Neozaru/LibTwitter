@@ -19,6 +19,9 @@ AC_PROG_CC
 AM_PROG_LIBTOOL
 AC_PROG_MAKE_SET
 
+# Remove is libcurl is statically linked
+PKG_CHECK_MODULES([libcurl],[libcurl])
+
 PKG_CHECK_MODULES([libtwitterc],[libtwitter-core])
 PKG_CHECK_MODULES([jsoncpp],[jsoncpp])
 
