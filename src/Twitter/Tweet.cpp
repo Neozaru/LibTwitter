@@ -1,6 +1,7 @@
 #include "Tweet.h"
 
 #include "User.h"
+#include <Twitter/Session.h>
 #include <Twitter/Core/TwitterSession.h>
 #include <Twitter/Core/TwitterRequest.h>
 
@@ -9,7 +10,7 @@
 
 using namespace Twitter;
 
-Tweet::Tweet( const Json::Value& root_node, TwitterSession* session ) 
+Tweet::Tweet( const Json::Value& root_node, Session* session ) 
 : Parsable_Object(root_node), _session(session), _sender(NULL), _original_author(NULL) {
 
 	_id = _json_root_node["id_str"].asString();

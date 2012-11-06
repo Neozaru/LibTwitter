@@ -33,6 +33,26 @@ namespace Twitter {
 			return new User( root_node, session );
 		}
 
+		
+		static std::list<User*> list_from_JSON( const Json::Value& root_node, Session* session  = NULL ) {
+		
+			std::list<User*> users;
+
+			for ( int i = 0; i < root_node.size(); ++i ) {
+			   
+				User* usr = new User( root_node[i], session );
+				if ( usr != NULL ) {
+					users.push_back(usr);
+				}
+
+			}
+
+			return users;
+
+
+		}
+		
+
 		/**
 		* \fn get_id
 		*
@@ -84,6 +104,24 @@ namespace Twitter {
 		* \return A list of Tweets posted by this User.
 		*/
 		const std::list<Tweet*>&  get_tweets( int count = 20, bool include_retweets = true, bool include_replies = true );
+
+		/**
+		* \fn get_followers
+		* \brief Get users following this User
+		*
+		* \return A list containing all followers
+		*
+		*/
+		const std::list<User*>&	get_followers();
+
+		/**
+		* \fn get_following
+		* \brief Get users followed by this User
+		*
+		* \return A list containing all following users.
+		*
+		*/
+		const std::list<User*>& get_following();
 
 		void request_full_info( bool force = false );
 

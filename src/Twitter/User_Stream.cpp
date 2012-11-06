@@ -50,7 +50,7 @@ void User_Stream::on_data_received( const std::string& data ) {
 	if ( tweets_roots.isArray() ) {
 		for ( int i = 0; i < tweets_roots.size(); ++i ) {
 		   
-			Tweet* tw = Tweet::from_JSON( tweets_roots[i], _session );
+			Tweet* tw = Tweet::from_JSON( tweets_roots[i], dynamic_cast<Session*>(_session) );
 			if ( tw != NULL ) {
 				std::cout << "TWEEEEET : " << *tw << std::endl;
 				tweets.push_back( tw );
@@ -59,7 +59,7 @@ void User_Stream::on_data_received( const std::string& data ) {
 		}
 	}
 	else {
-		Tweet* tw = Tweet::from_JSON( tweets_roots, _session );
+		Tweet* tw = Tweet::from_JSON( tweets_roots, dynamic_cast<Session*>(_session) );
 		if ( tw != NULL ) {
 			std::cout << "TWEEEEET : " << *tw << std::endl;
 			tweets.push_back( tw );

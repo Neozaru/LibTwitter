@@ -11,6 +11,7 @@ testSuite_SOURCES = Twitter/JSON_Parser.cpp Twitter/JSON_Parser.h \
 					Twitter/Session.cpp Twitter/Session.h \
 					Twitter/User.cpp Twitter/User.h \
 					Twitter/Tweet.cpp Twitter/Tweet.h \
+					Twitter/Direct_Message.cpp Twitter/Direct_Message.h \
 					Twitter/User_Stream.cpp Twitter/User_Stream.h \
 					Twitter/Parsable_Object.h \
 					tests.cpp

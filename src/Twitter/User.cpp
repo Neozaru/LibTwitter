@@ -82,21 +82,14 @@ const std::list<Tweet*>& User::get_tweets( int count, bool include_retweets, boo
 		if ( req-> get_response_code() == 200 ) {
 
 			const std::string& data = req-> get_response_data();
+
 			Json::Reader reader;
 			Json::Value tweets_roots;
 
 			reader.parse(data,tweets_roots);
 
-			for ( int i = 0; i < tweets_roots.size(); ++i ) {
-			   
-				Tweet* tw = Tweet::from_JSON( tweets_roots[i], _session );
-				if ( tw != NULL ) {
-					tw->set_sender( this );
-					_timeline.push_back(tw);
-				}
-
-			}
-
+			_timeline = Tweet::list_from_JSON( tweets_roots, _session );
+			// TODO : Set myslef as owner of Timeline Tweets
 
 		}
 
@@ -181,6 +174,51 @@ void User::to_stream( std::ostream& stream ) const {
 	stream << "User id : " << _id << std::endl;
 	stream << "User screen_name : " << _screen_name << std::endl;
 	stream << "User description : " << _description << std::endl;
+}
+
+Json::Value send_and_get_json( TwitterRequest* req ) {
+
+	Json::Value json;
+	req->send();
+
+	if ( req->get_response_code() == 200 ) {
+
+		json = JSON_Parser::parse_string_to_JSON( req->get_response_data() );
+
+	}
+
+	return json;
+
+}
+
+const std::list<User*>&	User::get_followers() {
+
+	std::list<User*> followers;
+
+	TwitterRequest* req = _session->followers_ids_request( _id, true );
+	Json::Value json = send_and_get_json( req );
+
+
+	followers = ( !json.isNull() ? User::list_from_JSON( json ) : followers );
+
+	return followers;
+
+}
+
+
+const std::list<User*>& User::get_following() {
+
+	std::list<User*> following;
+
+	TwitterRequest* req = _session->friends_ids_request( _id, true );
+	Json::Value json = send_and_get_json( req );
+
+	following = ( !json.isNull() ? User::list_from_JSON( json ) : following );
+
+
+	return following;
+
+
 }
 
 User::~User() {

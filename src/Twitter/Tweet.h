@@ -8,12 +8,12 @@
 
 #include <iostream>
 
-class TwitterSession;
+//class TwitterSession;
 
 namespace Twitter {
 
 	class User;
-
+	class Session;
 
 	/**
 	* \class Tweet
@@ -23,7 +23,7 @@ namespace Twitter {
 	class Tweet : public Parsable_Object {
 	private:
 
-		Tweet( const Json::Value& root_node, TwitterSession* session );
+		Tweet( const Json::Value& root_node, Session* session );
 
 	public:
 
@@ -109,15 +109,32 @@ namespace Twitter {
 		bool set_sender( User* sender );
 
 
-		static Tweet* from_JSON( Json::Value root_node, TwitterSession* session ) {
-			return new Tweet(root_node,session);
+		static Tweet* from_JSON( Json::Value root_node, Session* session ) {
+			return new Tweet( root_node, session );
+		}
+
+		static std::list<Tweet*> list_from_JSON( Json::Value root_node, Session* session ) {
+
+			std::list<Tweet*> tweets;
+
+			for ( int i = 0; i < root_node.size(); ++i ) {
+			   
+				Tweet* tw = new Tweet( root_node[i], session );
+				if ( tw != NULL ) {
+					//tw->set_sender( session->get_myself() );
+					tweets.push_back(tw);
+				}
+
+			}
+
+			return tweets;
 		}
 
 		void to_stream( std::ostream& stream ) const;
 
 	private:
 
-		TwitterSession* _session;
+		Session* _session;
 
 		std::string _id;
 		std::string _text;

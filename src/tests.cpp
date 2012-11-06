@@ -38,8 +38,8 @@ int main( int argc, char** argv ) {
 	/* It corresponds to your own app key/secret */
 	/* *** */
 
-	session->get_oauth().set_consumer_key( "MQvDXsNBq6desAPZIy9gpQ" );
-	session->get_oauth().set_consumer_secret( "qxUKLvasqKmUry3cN9KbTZLzYEgKKySVR8TCIVm3lgk" );
+	session->get_oauth().set_consumer_key( "4wdGht7GCUYqMbLLsY8Yg" );
+	session->get_oauth().set_consumer_secret( "DmPp6hteK6bgR4JiKLbOqSFPNT0r35QFAlbRGjR3E" );
 
 	/*************************************/
 
